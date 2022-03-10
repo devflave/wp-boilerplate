@@ -32,6 +32,9 @@
 
 # plugins
 /root/html/wp-content/plugins/akismet
+/root/html/wp-content/plugins/elementor
+/root/html/wp-content/plugins/elementor-pro
+/root/html/wp-content/plugins/elemext/public/node_modules
 /root/html/wp-content/plugins/*.php
 
 # Uploads

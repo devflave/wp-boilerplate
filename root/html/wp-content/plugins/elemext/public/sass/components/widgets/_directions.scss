@@ -1,0 +1,113 @@
+.directions{
+    .headline{
+        font-weight: bold;
+    }
+    .directions-form{
+
+        .input-wrapper{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1em;
+
+            label{
+                margin-bottom: 10px;
+                color: #483727;
+                font-family: 'Rajdhani';
+            }
+
+            input, select{
+                border-radius: 8px;
+                padding: 15px 10px;
+                font-size: 1.1875rem;
+                color: #483727;
+            }
+
+            input{
+                width: 100%;
+            }
+
+            .select-wrapper{
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                &:after{
+                    content: url("/wp-content/uploads/2021/09/form-dropdown-gross-braun.svg");
+                    position: absolute;
+                    right: 25px;
+                }
+
+                select{
+                    width: 100%;
+                    -webkit-appearance:none;
+                    -moz-appearance:none;
+                    appearance: none;
+                    cursor: pointer;
+                    font-family: 'Rajdhani';
+                }
+            }
+        }
+
+
+        .btn-container{
+            margin-top: 30px;
+            button{
+                -webkit-appearance:none;
+                -moz-appearance:none;
+                appearance: none;
+                background: #98BB1E;
+                color: #fff;
+                border-radius: 8px;
+                padding: 10px 25px;
+                border: none;
+                font-family: 'Rajdhani';
+            }
+            button:hover{
+                transition: 0.5s;
+                color:#fff;
+                border-radius: 7px;
+                background-color: #81A014;
+                text-decoration: none !important;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .directions-train{
+        margin-top: 100px;
+    }
+}
+
+@media (min-width: 768px) {
+    .directions{
+        .directions-form{
+            .input-wrapper{
+
+                input, select{
+                    padding: 30px 25px;
+                }
+
+                .datetime-wrapper{
+                    display: flex;
+                    .input-wrapper{
+                        width: 50%;
+
+                        &:first-child{
+                            margin-right: 10px;
+                        }
+        
+                        &:last-child{
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+
+            .btn-container{
+                button{
+                    padding: 18px 43px 16px;
+                }
+            }
+        }
+    }
+}

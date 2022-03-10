@@ -1,0 +1,57 @@
+.tourist-information{
+    display: grid;
+    gap: 35px 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+
+    >*{
+        flex-basis: calc(100% / 3);
+    }
+
+    .tourist-tile{        
+        display: grid;
+        align-items: end;
+        min-height: 420px;
+        >*{
+            grid-area: 1 / -1;
+        }
+
+        .information{
+            z-index: 1;
+            padding: 20px 30px;
+
+            .address{
+                padding-bottom: 20px;
+                *{
+                    color: #fff;
+                }
+
+                .location{
+                    margin-top: 20px;
+                    margin-bottom: 15px;
+                }
+
+                .title{
+                    margin: 0;
+                    font-size: 34px;
+                    font-weight: 700;
+                    line-height: 1;
+                }
+            }
+            
+            .opening-hours{
+                border-top: 1px solid #98BB1E;
+                padding-top: 15px;
+                p{
+                    margin: 0;
+                    color: #98BB1E;
+                }
+            }
+        }
+    }
+
+    .not-found{
+        min-height: 420px;
+    }
+    
+}

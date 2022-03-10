@@ -1,0 +1,39 @@
+.webcams-container{
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 100%;
+
+    .webcam-wrapper{
+        .webcam-headline{
+            margin-bottom: 0.5em;
+        }
+
+        img{
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .webcams-container{
+        grid-template-columns: repeat(2, 1fr);
+
+        .webcam-wrapper{
+            img{
+                max-height: 260px;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .webcams-container{
+        grid-template-columns: repeat(3, 1fr);
+
+        .webcam-wrapper{
+            img{
+                max-height: 200px;
+            }
+        }
+    }
+}

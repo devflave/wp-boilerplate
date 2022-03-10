@@ -1,0 +1,118 @@
+.location-detail-contact{
+
+    display: flex;
+
+    .location-detail-map{
+        flex-basis: 60%;
+        // background: #fff;
+        // box-shadow: 0 0 10px 0 rgb(0 0 0 / 30%);
+
+        #detail-map{
+            height: 450px;
+            border: 1px solid #483727;
+
+            .leaflet-pane{
+                z-index: 5;
+            }
+
+            .leaflet-top{
+                z-index:10;
+            }
+        }
+
+        
+    }
+    .information{
+        flex-basis: 40%;
+        margin-left: 50px;
+
+        .address, .contact, .tourism{
+            border-top: 1px solid #483727;
+            padding: 25px 0;
+        }
+
+        .address{
+            .name{
+                margin-bottom: 25px;
+
+                strong{
+                    font-weight: 700;
+                }
+            }
+
+            p{
+                margin: 0;
+                font-size: 1.125rem;
+                line-height: 1.7;
+            }
+        }
+
+        .contact{
+            .links{
+                a{
+                    font-size: 1.125rem;
+                    font-weight: 300;
+                    display: block;
+
+                    &:before{
+                        margin-right: 13px;
+                    }
+
+                    &.website{
+                        &:before{
+                            content: url("https://ztl.dev.test/wp-content/uploads/2021/09/poi-link-external.svg");
+                        }
+                    }
+
+                    &.phone:before{
+                        content: url("https://ztl.dev.test/wp-content/uploads/2021/09/poi-telefon.svg");
+                    }
+
+
+                }
+            }
+
+            .email{
+                margin-top: 30px;
+                border-radius: 8px;
+                border: 1px solid #98BB1E;
+                padding: 17px 19px 16px 19px;
+                font-size: 1.125rem;
+                line-height: 1;
+                width: auto;
+                width: fit-content;
+                
+                a{
+                    color: #98BB1E;
+                }
+            }
+        }
+
+        .tourism{
+            border-bottom: 1px solid #483727;
+
+            h3{
+                margin-top: 0;
+            }
+            
+            .opening-hours{
+    
+                h4{
+                    margin-top: 0;
+                }
+    
+                table{
+                    margin: 0;
+                
+                    td{
+                        color: #483727;
+    
+                        &.day{
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

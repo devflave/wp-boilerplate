@@ -1,0 +1,37 @@
+.interferer{
+    display: grid;
+    max-width: 195px;
+    transform: rotate(5deg);
+
+    >*{
+        grid-area: 1 / -1;
+    }
+
+    &-text{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        span{
+           text-align: center;
+           width: 90%;
+           color: #483727;
+
+            &:before, &:after{
+                content: "";
+                background-image: url("/wp-content/uploads/2021/08/linie-weiss.svg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 60%;
+                height: 10px;
+                display: block;
+                margin: auto;
+            }
+
+            &:after{
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
