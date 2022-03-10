@@ -1,0 +1,120 @@
+version: '3.9'
+services:
+  traefik:
+    image: traefik:v2.5
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    restart: always
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.file.directory=/config/"
+      - "--providers.file.watch=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--log.level=DEBUG"
+      - "--accessLog"
+      - "--providers.docker.network=devops"
+    networks:
+      - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.dev.test`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=letsencryptresolver"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls=true"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config/:/config/
+
+  portainer:
+    image: portainer/portainer:latest
+    depends_on:
+      - database
+      - traefik
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.dev.test`)"
+      - "traefik.http.routers.portainer.entrypoints=web"
+      - "traefik.http.routers.portainer-secure.rule=Host(`portainer.dev.test`)"
+      - "traefik.http.routers.portainer-secure.entrypoints=websecure"
+      - "traefik.http.routers.portainer-secure.tls=true"
+
+  adminer:
+    image: adminer:latest
+    volumes:
+      - ./config/adminer/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    restart: always
+    depends_on:
+      - database
+      - traefik
+    links:
+      - database
+    environment:
+      ADMINER_DEFAULT_SERVER: database
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      ADMINER_DESIGN: rmsoft_blue
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adminer.rule=Host(`adminer.dev.test`)"
+      - "traefik.http.routers.adminer.entrypoints=web"
+      - "traefik.http.routers.adminer-secure.rule=Host(`adminer.dev.test`)"
+      - "traefik.http.routers.adminer-secure.entrypoints=websecure"
+      - "traefik.http.routers.adminer-secure.tls=true"
+
+  wpsite:
+    image: wordpress:latest
+    container_name: wpsite
+    depends_on:
+      - database
+      - traefik
+    volumes:
+      - ./root/html:/var/www/html:cached
+    links:
+      - database
+    restart: always
+    environment:
+      - WEB_ALIAS_DOMAIN=wpsite.dev.test
+      - WEB_DOCUMENT_ROOT=/var/www/html
+      - PHP_DISPLAY_ERRORS=1
+      - PHP_MEMORY_LIMIT=4096M
+      - PHP_MAX_EXECUTION_TIME=600
+      - PHP_POST_MAX_SIZE=4096M
+      - PHP_UPLOAD_MAX_FILESIZE=4096M
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wpsite.rule=Host(`wpsite.dev.test`)"
+      - "traefik.http.routers.wpsite.entrypoints=web"
+
+  database:
+    image: mysql:5.7
+    container_name: database
+    volumes:
+      - ./database/mysql:/var/lib/mysql
+      - ./config/database/custom.cnf:/etc/mysql/conf.d/custom.cnf  
+    ports:
+      - '3308:3306'
+    restart: always
+    command: --max_allowed_packet=32505856
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=maindb
+
+volumes:
+  portainer_data:
+networks:
+  default:
+    name: devops
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1450
+      

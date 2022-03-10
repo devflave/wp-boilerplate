@@ -1,0 +1,55 @@
+# modules
+/root/html/node_modules/
+
+# log files and databases
+/root/html/*.log
+/root/html/*.sql
+/root/html/*.sqlite
+
+# Core
+/root/html/wp-admin/
+/root/html/wp-content/index.php
+/root/html/wp-content/languages
+/root/html/wp-content/plugins/index.php
+/root/html/wp-content/themes/index.php
+/root/html/wp-includes/
+/root/html/index.php
+/root/html/license.txt
+/root/html/readme.html
+/root/html/wp-*.php
+/root/html/xmlrpc.php
+
+# Configuration
+/root/html/wp-config.php
+
+# themes
+/root/html/wp-content/themes/twenty*/
+/root/html/wp-content/themes/zweitaelerland/node_modules
+/root/html/wp-content/themes/zweitaelerland/style-rtl.css
+/root/html/wp-content/themes/zweitaelerland/style.css
+/root/html/wp-content/themes/zweitaelerland/js/main.min.js
+
+
+# plugins
+/root/html/wp-content/plugins/akismet
+/root/html/wp-content/plugins/*.php
+
+# Uploads
+/root/html/wp-content/uploads/
+
+# Log files & cache
+/root/html/*.log
+/root/html/cache/
+/root/html/wp-content/cache/
+
+# htaccess
+/root/html/.htaccess
+
+#other
+html/wp-content/advanced-cache.php
+html/wp-content/autoptimize_404_handler.php
+html/wp-content/w3tc-config/
+html/liesmich.html
+html/wp-content/backups-dup-lite/
+html/nginx.conf
+database/*
